@@ -6,10 +6,15 @@
 
 package system.rezerwacji;
 
+import java.util.Calendar;
+import java.util.List;
+
 /**
  *
  * @author tomaszgostek
  */
 public class Hotel {
-    
+    List<QueryResult> findFreeRooms(Calendar start, Calendar end, int n_persons) {
+        return null;
+    }
 }
