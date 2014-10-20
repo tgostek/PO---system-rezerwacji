@@ -6,10 +6,18 @@
 
 package system.rezerwacji;
 
+import java.util.List;
+
 /**
  *
  * @author tomaszgostek
  */
 public class QueryResult {
+    List<Room> rooms() {
+        return null;
+    }
     
+    int price() {
+        return 0;
+    }
 }

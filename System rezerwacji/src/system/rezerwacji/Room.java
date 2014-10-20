@@ -11,5 +11,10 @@ package system.rezerwacji;
  * @author tomaszgostek
  */
 public class Room {
-    
+    String name() {
+        return "";
+    }
+    int n_persons() {
+        return 0;
+    }
 }
