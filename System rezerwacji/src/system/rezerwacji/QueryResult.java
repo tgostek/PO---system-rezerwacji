@@ -6,6 +6,7 @@
 
 package system.rezerwacji;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,11 +14,26 @@ import java.util.List;
  * @author tomaszgostek
  */
 public class QueryResult {
+    List<Room> rooms;
+    int price = 0;
+    
+    public QueryResult() {
+        rooms = new ArrayList<Room>();
+    }
+    
+    void add(Room room) {
+        rooms.add(room);
+    }
+
     List<Room> rooms() {
-        return null;
+        return rooms;
+    }
+    
+    void addPrice(int price) {
+        this.price += price;
     }
     
     int price() {
-        return 0;
+        return price;
     }
 }
