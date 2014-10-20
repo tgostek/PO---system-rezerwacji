@@ -22,11 +22,11 @@ public class QueryResult {
     }
     
     void add(Room room) {
-        rooms.add(room);
+        this.rooms.add(room);
     }
 
     List<Room> rooms() {
-        return rooms;
+        return this.rooms;
     }
     
     void addPrice(int price) {
@@ -34,6 +34,6 @@ public class QueryResult {
     }
     
     int price() {
-        return price;
+        return this.price;
     }
 }

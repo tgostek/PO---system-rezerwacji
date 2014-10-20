@@ -82,23 +82,55 @@ public class HotelTest {
         
         QueryResult firstRecord = result.get(0);
         List<Room> searchResult = firstRecord.rooms();
-        Room expRoom = searchResult.get(0);
+        Room resRoom = searchResult.get(0);
         
         assertEquals(expResultListSize, result.size());
         System.out.println("testFindFreeRoomsOneRoom - liczba możliwość " + result.size());
         assertEquals(expResultListSize, searchResult.size());
         System.out.println("testFindFreeRoomsOneRoom - liczba pokojów jedynej możliwości " + searchResult.size());
-        assertEquals(roomName, expRoom.name());
-        System.out.println("testFindFreeRoomsOneRoom - nazwa tego pokoju " + expRoom.name());
-        assertEquals(numberOfPersons, expRoom.n_persons());
-        System.out.println("testFindFreeRoomsOneRoom - pojemność pokoju " + expRoom.n_persons());
+        assertEquals(roomName, resRoom.name());
+        System.out.println("testFindFreeRoomsOneRoom - nazwa tego pokoju " + resRoom.name());
+        assertEquals(numberOfPersons, resRoom.n_persons());
+        System.out.println("testFindFreeRoomsOneRoom - pojemność pokoju " + resRoom.n_persons());
         assertEquals(price*7, firstRecord.price());
         System.out.println("testFindFreeRoomsOneRoom - cena " + firstRecord.price());
+        assertSame("Błędny pokój", room, resRoom);
         
         // TODO review the generated test code and remove the default call to fail.
         //fail("The test case is a prototype.");
     }
     
+    /**
+     * Test of findFreeRooms method, of class Hotel.
+     * scenario: Hotel with one single room, two 2 persons rooms and one 4 persons room
+     */
+    @Test
+    public void testFindFreeRoomsFewRooms() {
+        System.out.println("testFindFreeRoomsFewRooms");
+        Calendar start = new GregorianCalendar(2014, 1, 1);
+        Calendar end = new GregorianCalendar(2014, 1, 8);
+        int n_persons = 3;
+        Hotel hotel = new Hotel();
+        
+        Room room1 = new Room("jedynka", 1, 120);
+        Room room2_1 = new Room("dwójka-1", 2, 180);
+        Room room2_2 = new Room("dwójka-2", 2, 180);
+        Room room4 = new Room("czwórka", 4, 300);
+        
+        hotel.add(room1);
+        hotel.add(room2_1);
+        hotel.add(room2_2);
+        hotel.add(room4);
+        
+        List<QueryResult> result = hotel.findFreeRooms(start, end, n_persons);
+        int expResultListSize = 4;
+        
+        assertEquals(expResultListSize, result.size());
+        System.out.println("testFindFreeRoomsFewRooms - liczba możliwość " + result.size());
+        
+        QueryResult qr1 = result.get(0);
+        System.out.println("testFindFreeRoomsFewRooms - pierwsza propozycja " );
+    }
     @Test
     public void testGetNumberOfNights() {
         System.out.println("testGetNumberOfNights");
