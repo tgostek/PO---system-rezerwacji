@@ -85,16 +85,16 @@ public class HotelTest {
         Room resRoom = searchResult.get(0);
         
         assertEquals(expResultListSize, result.size());
-        System.out.println("testFindFreeRoomsOneRoom - liczba możliwość " + result.size());
+        System.out.println("testFindFreeRoomsOneRoom - liczba mozliwosc " + result.size());
         assertEquals(expResultListSize, searchResult.size());
-        System.out.println("testFindFreeRoomsOneRoom - liczba pokojów jedynej możliwości " + searchResult.size());
+        System.out.println("testFindFreeRoomsOneRoom - liczba pokojow jedynej możliwości " + searchResult.size());
         assertEquals(roomName, resRoom.name());
         System.out.println("testFindFreeRoomsOneRoom - nazwa tego pokoju " + resRoom.name());
         assertEquals(numberOfPersons, resRoom.n_persons());
-        System.out.println("testFindFreeRoomsOneRoom - pojemność pokoju " + resRoom.n_persons());
+        System.out.println("testFindFreeRoomsOneRoom - pojemnosc pokoju " + resRoom.n_persons());
         assertEquals(price*7, firstRecord.price());
         System.out.println("testFindFreeRoomsOneRoom - cena " + firstRecord.price());
-        assertSame("Błędny pokój", room, resRoom);
+        assertSame("Bledny pokoj", room, resRoom);
         
         // TODO review the generated test code and remove the default call to fail.
         //fail("The test case is a prototype.");
@@ -123,14 +123,12 @@ public class HotelTest {
         hotel.add(room4);
         
         List<QueryResult> result = hotel.findFreeRooms(start, end, n_persons);
-        int expResultListSize = 4;
+        int expResultListSize = 0;
         
         assertEquals(expResultListSize, result.size());
-        System.out.println("testFindFreeRoomsFewRooms - liczba możliwość " + result.size());
-        
-        QueryResult qr1 = result.get(0);
-        System.out.println("testFindFreeRoomsFewRooms - pierwsza propozycja " );
+        System.out.println("testFindFreeRoomsFewRooms - liczba mozliwosci " + result.size());
     }
+    
     @Test
     public void testGetNumberOfNights() {
         System.out.println("testGetNumberOfNights");
