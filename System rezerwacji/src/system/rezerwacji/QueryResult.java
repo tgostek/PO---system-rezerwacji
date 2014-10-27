@@ -1,39 +1,69 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package system.rezerwacji;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author tomaszgostek
- */
-public class QueryResult {
-    List<Room> rooms;
-    int price = 0;
+public class QueryResult implements Comparable<QueryResult>{
     
+    //private section
+    private List<Room> rooms;
+    private int nights;
+    
+    //public section
     public QueryResult() {
-        rooms = new ArrayList<Room>();
+        this.rooms = new ArrayList<>();
+        this.nights = 0;
     }
     
-    void add(Room room) {
+    
+    public void add(Room room) {
         this.rooms.add(room);
     }
-
-    List<Room> rooms() {
+    
+    public void add(QueryResult qr) {
+        for(Room room : qr.rooms())
+        {
+            this.add(room);
+        }
+    }
+    
+    public void setNights(int nights){
+        this.nights = nights;
+    }
+    
+    public List<Room> rooms() {
         return this.rooms;
     }
     
-    void addPrice(int price) {
-        this.price += price;
+    public int price() {
+        int price = 0;
+        for(Room room : this.rooms)
+        {
+            price += room.price() * this.nights;
+        }
+        return price;
     }
     
-    int price() {
-        return this.price;
+    public int n_person(){
+        int n_person = 0;
+        for(Room room : this.rooms)
+            n_person += room.n_persons();
+        return n_person;
+    }
+    
+    @Override
+    public String toString() {
+        String l_result = "";
+        for(Room room : this.rooms)
+            l_result += room + "\n";
+        l_result += "Total: " + this.rooms.size() + " rooms for " + this.price() + " EUR.";
+        return l_result;
+    }
+    
+    @Override
+    public int compareTo(QueryResult qr) {
+        Integer myNPrice = this.price();
+        Integer oNPrice = qr.price();
+        return myNPrice.compareTo(oNPrice);
     }
 }

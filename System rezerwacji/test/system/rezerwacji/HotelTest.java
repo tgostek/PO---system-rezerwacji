@@ -41,103 +41,84 @@ public class HotelTest {
     @After
     public void tearDown() {
     }
-
-    /**
-     * Test of findFreeRooms method, of class Hotel.
-     * scenario: Empty Hotel
-     */
-    @Test
-    public void testFindFreeRoomsEmptyHotel() {
-        System.out.println("findFreeRoomsEmptyHotel");
-        Calendar start = new GregorianCalendar(2014, 1, 1);
-        Calendar end = new GregorianCalendar(2014, 1, 8);
-        int n_persons = 0;
-        Hotel hotel = new Hotel();
-        List<QueryResult> expResult = new ArrayList<QueryResult>();
-        List<QueryResult> result = hotel.findFreeRooms(start, end, n_persons);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
-    }
     
     /**
-     * Test of findFreeRooms method, of class Hotel.
-     * scenario: Hotel with only one room for 2 persons
+     * Find rooms in a hotel without any rooms. Should return an empty list.
      */
     @Test
-    public void testFindFreeRoomsOneRoom() {
-        System.out.println("testFindFreeRoomsOneRoom");
+    public void Test_1_1() {
+        System.out.println("\nTest_1_1 START");
+        
+        Hotel hotel = new Hotel();
+        
         Calendar start = new GregorianCalendar(2014, 1, 1);
         Calendar end = new GregorianCalendar(2014, 1, 8);
-        int n_persons = 2;
-        Hotel hotel = new Hotel();
-        String roomName = "test_name";
-        int numberOfPersons = 2;
-        int price = 180;
-        Room room = new Room(roomName, numberOfPersons, price);
-        hotel.add(room);
         
-        List<QueryResult> result = hotel.findFreeRooms(start, end, n_persons);
-        int expResultListSize = 1;
+        List<QueryResult> result = hotel.findFreeRooms(start, end, 2);
         
-        QueryResult firstRecord = result.get(0);
-        List<Room> searchResult = firstRecord.rooms();
-        Room resRoom = searchResult.get(0);
+        assertEquals(0, result.size());
         
-        assertEquals(expResultListSize, result.size());
-        System.out.println("testFindFreeRoomsOneRoom - liczba mozliwosc " + result.size());
-        assertEquals(expResultListSize, searchResult.size());
-        System.out.println("testFindFreeRoomsOneRoom - liczba pokojow jedynej możliwości " + searchResult.size());
-        assertEquals(roomName, resRoom.name());
-        System.out.println("testFindFreeRoomsOneRoom - nazwa tego pokoju " + resRoom.name());
-        assertEquals(numberOfPersons, resRoom.n_persons());
-        System.out.println("testFindFreeRoomsOneRoom - pojemnosc pokoju " + resRoom.n_persons());
-        assertEquals(price*7, firstRecord.price());
-        System.out.println("testFindFreeRoomsOneRoom - cena " + firstRecord.price());
-        assertSame("Bledny pokoj", room, resRoom);
-        
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
+        System.out.println("Test_1_1 PASS");
     }
     
+    
     /**
-     * Test of findFreeRooms method, of class Hotel.
-     * scenario: Hotel with one single room, two 2 persons rooms and one 4 persons room
+     * Find a room for two persons in an empty hotel containing only one double room. 
+     * Should return a list with exactly one QueryResult. 
+     * Calling rooms() on this result should return the one element list with one room. 
+     * Method price() should return 180*(number of nights).
      */
     @Test
-    public void testFindFreeRoomsFewRooms() {
-        System.out.println("testFindFreeRoomsFewRooms");
-        Calendar start = new GregorianCalendar(2014, 1, 1);
-        Calendar end = new GregorianCalendar(2014, 1, 8);
-        int n_persons = 3;
+    public void Test_1_2() {
+        System.out.println("\nTest_1_2 START");
+        
         Hotel hotel = new Hotel();
         
-        Room room1 = new Room("jedynka", 1, 120);
-        Room room2_1 = new Room("dwójka-1", 2, 180);
-        Room room2_2 = new Room("dwójka-2", 2, 180);
-        Room room4 = new Room("czwórka", 4, 300);
+        Room room1 = new Room("A", 2, 180);
         
         hotel.add(room1);
-        hotel.add(room2_1);
-        hotel.add(room2_2);
-        hotel.add(room4);
         
-        List<QueryResult> result = hotel.findFreeRooms(start, end, n_persons);
-        int expResultListSize = 0;
-        
-        assertEquals(expResultListSize, result.size());
-        System.out.println("testFindFreeRoomsFewRooms - liczba mozliwosci " + result.size());
-    }
-    
-    @Test
-    public void testGetNumberOfNights() {
-        System.out.println("testGetNumberOfNights");
         Calendar start = new GregorianCalendar(2014, 1, 1);
         Calendar end = new GregorianCalendar(2014, 1, 8);
         
-        int expResult = 7;
-        int result = Hotel.getCountOfNights(start, end);
+        List<QueryResult> result = hotel.findFreeRooms(start, end, 2);
         
-        assertEquals(expResult, result);
+        assertEquals(1, result.size());
+        assertEquals(180*7, result.get(0).price());
+        
+        System.out.println("Test_1_2 PASS");
     }
+    /**
+     * The hotel has one single room, two 2 persons rooms and one 4 persons room. 
+     * Find accommodation for three persons. Single room cost 120 per night, double
+     * room cost 180 per night and four person room costs 300 per night. 
+     * Should return a list of the three cheapest possibilities (single room + double room, 4 persons room).
+     */
+    @Test
+    public void Test_2_1() {
+        System.out.println("\nTest_2_1 START");
+        
+        Hotel hotel = new Hotel();
+        
+        Room room1 = new Room("A", 1, 120);
+        Room room2 = new Room("B", 2, 180);
+        Room room3 = new Room("C", 2, 180);
+        Room room4 = new Room("D", 4, 300);
+        
+        hotel.add(room1);
+        hotel.add(room2);
+        hotel.add(room3);
+        hotel.add(room4);
+        
+        Calendar start = new GregorianCalendar(2014, 1, 1);
+        Calendar end = new GregorianCalendar(2014, 1, 2);
+        
+        List<QueryResult> result = hotel.findFreeRooms(start, end, 3);
+        
+        assertEquals(3, result.size());
+        assertEquals(300, result.get(0).price());
+        
+        System.out.println("Test_2_1 PASS");
+    }
+    
 }

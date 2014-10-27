@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 package system.rezerwacji;
 
@@ -10,20 +5,14 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-/**
- *
- * @author tomaszgostek
- */
-public class Room {
+
+public class Room implements Comparable<Room>{
     
-    List<Calendar> reservations;
-    
-    String name;
-    int n_persons;
-    int price;
+    private String name;
+    private int n_persons;
+    private int price;
     
     public Room(String name, int n_persons, int price) {
-        reservations = new ArrayList<Calendar>();
         this.name = name;
         this.n_persons = n_persons;
         this.price = price;
@@ -33,11 +22,27 @@ public class Room {
         return name;
     }
     
-    int getPrice() {
+    int price() {
         return price;
     }
     
     int n_persons() {
         return n_persons;
     }
+    
+    @Override
+    public String toString() {
+        return "Room \'" +  this.name + 
+               "\' for " + this.n_persons + 
+               " costs: " + this.price + " EUR.";
+    }
+    
+    @Override
+    public int compareTo(Room room) {
+        Integer myNPerson = this.n_persons;
+        Integer oNPerson = room.n_persons();
+        return myNPerson.compareTo(oNPerson);
+    }
+    
+    
 }
