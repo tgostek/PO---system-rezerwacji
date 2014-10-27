@@ -112,11 +112,11 @@ public class Hotel {
         rooms = new ArrayList<>();
     }
     
-    void add(Room room) {
+    public void add(Room room) {
         rooms.add(room);
     }
     
-    List<QueryResult> findFreeRooms(Calendar start, Calendar end, int n_persons) {
+    public List<QueryResult> findFreeRooms(Calendar start, Calendar end, int n_persons) {
         List<QueryResult> l_qr = new ArrayList<>();
         
         if(this.rooms.isEmpty())
@@ -145,5 +145,6 @@ public class Hotel {
             
         return l_qr;
     }
+    
     
     }

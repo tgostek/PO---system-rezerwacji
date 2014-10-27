@@ -120,5 +120,4 @@ public class HotelTest {
         
         System.out.println("Test_2_1 PASS");
     }
-    
 }
