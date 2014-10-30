@@ -105,6 +105,7 @@ public class HotelTest {
         Room room3 = new Room("C", 2, 180);
         Room room4 = new Room("D", 4, 300);
         
+        
         hotel.add(room1);
         hotel.add(room2);
         hotel.add(room3);
@@ -117,7 +118,53 @@ public class HotelTest {
         
         assertEquals(3, result.size());
         assertEquals(300, result.get(0).price());
+        assertTrue(3  <= result.get(0).n_person());
+        
         
         System.out.println("Test_2_1 PASS");
     }
+    
+    @Test
+    public void Test_2_2() {
+        System.out.println("\nTest_2_2 START");
+        
+        Hotel hotel = new Hotel();
+        
+        Room room1 = new Room("A", 1, 120);
+        Room room2 = new Room("B", 2, 180);
+        Room room3 = new Room("C", 2, 180);
+        Room room4 = new Room("D", 4, 300);
+        
+        Room room5 = new Room("CC", 3, 300);
+        Room room6 = new Room("CD", 1, 100);
+        Room room7 = new Room("CE", 2, 150);
+        Room room8 = new Room("CF", 2, 150);
+        Room room9 = new Room("CG", 1, 100);
+        Room room10 = new Room("CH", 1, 100);
+        
+        hotel.add(room1);
+        hotel.add(room2);
+        hotel.add(room3);
+        hotel.add(room4);
+        hotel.add(room5);
+        hotel.add(room6);
+        hotel.add(room7);
+        hotel.add(room8);
+        hotel.add(room9);
+        hotel.add(room10);
+        
+        Calendar start = new GregorianCalendar(2014, 1, 1);
+        Calendar end = new GregorianCalendar(2014, 1, 2);
+        
+        List<QueryResult> result = hotel.findFreeRooms(start, end, 3);
+        
+        assertEquals(6, result.size());
+        assertEquals(250, result.get(0).price());
+        assertTrue(3  <= result.get(0).n_person());
+        
+        System.out.println(result.get(0));
+        
+        System.out.println("Test_2_2 PASS");
+    }
+
 }

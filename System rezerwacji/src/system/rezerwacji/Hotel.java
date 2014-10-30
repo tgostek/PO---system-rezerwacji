@@ -11,10 +11,10 @@ public class Hotel {
     //private sector
     private final List<Room> rooms;
     
-    private List<Room> getAllRoomsEqual(int p_numberOfPersons)
+    private List<Room> getAllRoomsEqual(int p_numberOfPersons, List<Room> p_rooms)
     {
         List<Room> l_listRooms = new ArrayList<>();
-        for(Room room : this.rooms)
+        for(Room room : p_rooms)
             if(room.n_persons() == p_numberOfPersons)
                 l_listRooms.add(room);
         return l_listRooms;
@@ -42,7 +42,7 @@ public class Hotel {
     {
         List<QueryResult> l_qr = new ArrayList<>();
         
-        List<Room> l_listRooms = getAllRoomsEqual(p_numberOfPersons);
+        List<Room> l_listRooms = getAllRoomsEqual(p_numberOfPersons, this.rooms);
         for(Room room : l_listRooms)
         {
             QueryResult qr = new QueryResult();
@@ -74,15 +74,20 @@ public class Hotel {
                     
                 if(l_tempQr.n_person() + l_room.n_persons() == p_numberOfPersons)
                 {
-                    List<Room> ll_rooms = getAllRoomsEqual(l_room.n_persons());
+                    List<Room> ll_rooms = getAllRoomsEqual(l_room.n_persons(), l_listRooms);
                     for(Room room : ll_rooms)
                     {
+                        if(l_tempQr.isRoom(room))
+                        {
+                            continue;
+                        }
+                        
                         QueryResult l_tempQr2 = new QueryResult();
                         l_tempQr2.add(room);
                         l_tempQr2.add(l_tempQr);
                         l_qr.add(l_tempQr2);
                     }
-                    continue;
+                    break;
                 }
                 
                 if(l_tempQr.n_person() + l_room.n_persons() < p_numberOfPersons)
@@ -103,9 +108,6 @@ public class Hotel {
         
         return (int)( (d2.getTime() - d1.getTime()) / (1000 * 60 * 60 * 24));
     }
-
-    
-    
     
     //public sector
     public Hotel() {
@@ -116,13 +118,16 @@ public class Hotel {
         rooms.add(room);
     }
     
-    public List<QueryResult> findFreeRooms(Calendar start, Calendar end, int n_persons) {
+    private List<QueryResult> findCheapestFreeRooms(Calendar start, Calendar end, int n_persons)
+    {
         List<QueryResult> l_qr = new ArrayList<>();
-        
-        if(this.rooms.isEmpty())
-            return l_qr;
-        
         l_qr = findAllPosibleCombination(n_persons);
+        
+        for(QueryResult qr : l_qr)
+        {
+            qr.setNights(getCountOfNights(start,end));
+        }
+        
         Collections.sort(l_qr);
         
         int cheapestPrice = l_qr.get(0).price();
@@ -132,19 +137,26 @@ public class Hotel {
         {
             if(l_qr.get(i).price() == cheapestPrice)
                 continue;
-            index = i;
-            break;
+            else
+            {
+                index = i;
+                break;
+            }
         }
         
         l_qr = l_qr.subList(0, index);
-        
-        for(QueryResult qr : l_qr)
-        {
-            qr.setNights(getCountOfNights(start,end));
-        }
-            
         return l_qr;
     }
     
+    public List<QueryResult> findFreeRooms(Calendar start, Calendar end, int n_persons) {
+        List<QueryResult> l_qr = new ArrayList<>();
+        
+        if(this.rooms.isEmpty())
+            return l_qr;
+        
+        l_qr = findCheapestFreeRooms(start, end, n_persons);
+            
+        return l_qr;
+    }
     
     }
