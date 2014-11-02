@@ -17,10 +17,6 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-/**
- *
- * @author tomaszgostek
- */
 public class HotelTest {
     
     public HotelTest() {
@@ -88,12 +84,13 @@ public class HotelTest {
         
         System.out.println("Test_1_2 PASS");
     }
+    
     /**
      * The hotel has one single room, two 2 persons rooms and one 4 persons room. 
      * Find accommodation for three persons. Single room cost 120 per night, double
      * room cost 180 per night and four person room costs 300 per night. 
      * Should return a list of the three cheapest possibilities (single room + double room, 4 persons room).
-     */
+    */
     @Test
     public void Test_2_1() {
         System.out.println("\nTest_2_1 START");
@@ -115,7 +112,7 @@ public class HotelTest {
         Calendar end = new GregorianCalendar(2014, 1, 2);
         
         List<QueryResult> result = hotel.findFreeRooms(start, end, 3);
-        
+
         assertEquals(3, result.size());
         assertEquals(300, result.get(0).price());
         assertTrue(3  <= result.get(0).n_person());
@@ -162,9 +159,9 @@ public class HotelTest {
         assertEquals(250, result.get(0).price());
         assertTrue(3  <= result.get(0).n_person());
         
-        System.out.println(result.get(0));
+        
         
         System.out.println("Test_2_2 PASS");
     }
-
+    
 }

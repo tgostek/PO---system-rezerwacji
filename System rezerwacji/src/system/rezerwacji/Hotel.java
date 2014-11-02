@@ -20,10 +20,10 @@ public class Hotel {
         return l_listRooms;
     }
     
-    private List<Room> getAllRoomsAbove(int p_numberOfPersons)
+    private List<Room> getAllRoomsAbove(int p_numberOfPersons, List<Room> p_rooms)
     {
         List<Room> l_listRooms = new ArrayList<>();
-        for(Room room : this.rooms)
+        for(Room room : p_rooms)
             if(room.n_persons() > p_numberOfPersons)
                 l_listRooms.add(room);
         return l_listRooms;
@@ -38,65 +38,79 @@ public class Hotel {
                 i++;
     }
     
-    private List<QueryResult> findAllPosibleCombination(int p_numberOfPersons)
+    private List<QueryResult> findAllCheapestCombinationsRooms(List<QueryResult> listQR)
+    {
+        if(listQR.isEmpty())
+        {
+            return listQR;
+        }
+        
+        Collections.sort(listQR);
+        
+        int index = listQR.size();
+        int cheapestPrice = listQR.get(0).price();
+        for(QueryResult qr : listQR)
+        {
+            if(cheapestPrice != qr.price())
+            {
+                index = listQR.indexOf(qr);
+                break;
+            }
+        }
+        
+        listQR = listQR.subList(0, index);
+        
+        return listQR;
+    }
+    
+    private List<QueryResult> findAllCombinationsRooms(List<Room> p_rooms, int n_persons)
     {
         List<QueryResult> l_qr = new ArrayList<>();
         
-        List<Room> l_listRooms = getAllRoomsEqual(p_numberOfPersons, this.rooms);
-        for(Room room : l_listRooms)
+        List<Room> temp_room = getAllRoomsAbove(n_persons-1, p_rooms);
+        for(Room room : temp_room)
         {
             QueryResult qr = new QueryResult();
             qr.add(room);
             l_qr.add(qr);
         }
         
-        l_listRooms = getAllRoomsAbove(p_numberOfPersons);
-        for(Room room : l_listRooms)
-        {
-            QueryResult qr = new QueryResult();
-            qr.add(room);
-            l_qr.add(qr);
-        }
+        deleteAllRoomsAbove(n_persons-1, p_rooms);
         
-        
-        l_listRooms = new ArrayList<>(this.rooms);
-        deleteAllRoomsAbove(p_numberOfPersons - 1, l_listRooms);
-        
-        Collections.sort(l_listRooms);
-        
-        for(int i = l_listRooms.size()-1; i >= 0; i = l_listRooms.size()-1)
+        while(p_rooms.size() > 0)
         {  
-            QueryResult l_tempQr = new QueryResult();
-            l_tempQr.add(l_listRooms.get(i));
-            for(int j = i-1; j >= 0; j--)
+            List<Room> second_rooms = new ArrayList<>(p_rooms);
+            Room room = p_rooms.get(p_rooms.size()-1);
+            
+            second_rooms.remove(room);
+            
+            while(second_rooms.size() > 0)
             {
-                Room l_room = l_listRooms.get(j);
-                    
-                if(l_tempQr.n_person() + l_room.n_persons() == p_numberOfPersons)
+                QueryResult qr = new QueryResult();
+                qr.add(room);
+                int lastIdx = second_rooms.size()-1;
+                
+                for(int j = lastIdx; j >= 0; j--)
                 {
-                    List<Room> ll_rooms = getAllRoomsEqual(l_room.n_persons(), l_listRooms);
-                    for(Room room : ll_rooms)
+                    Room second_room = second_rooms.get(j);
+                    
+                    if(qr.n_person() + second_room.n_persons() < n_persons)
                     {
-                        if(l_tempQr.isRoom(room))
-                        {
-                            continue;
-                        }
-                        
-                        QueryResult l_tempQr2 = new QueryResult();
-                        l_tempQr2.add(room);
-                        l_tempQr2.add(l_tempQr);
-                        l_qr.add(l_tempQr2);
+                        qr.add(second_room);
+                        continue;
+                    }
+                    
+                    if(qr.n_person() + second_room.n_persons() == n_persons)
+                    {
+                        qr.add(second_room);
+                        l_qr.add(qr);
                     }
                     break;
                 }
-                
-                if(l_tempQr.n_person() + l_room.n_persons() < p_numberOfPersons)
-                {
-                    l_tempQr.add(l_room);
-                    continue;
-                }
+                second_rooms.remove(lastIdx);   
             }
-            l_listRooms.remove(l_listRooms.get(i));   
+            
+            p_rooms.remove(room);
         }
         
         return l_qr;
@@ -118,43 +132,23 @@ public class Hotel {
         rooms.add(room);
     }
     
-    private List<QueryResult> findCheapestFreeRooms(Calendar start, Calendar end, int n_persons)
-    {
-        List<QueryResult> l_qr = new ArrayList<>();
-        l_qr = findAllPosibleCombination(n_persons);
-        
-        for(QueryResult qr : l_qr)
-        {
-            qr.setNights(getCountOfNights(start,end));
-        }
-        
-        Collections.sort(l_qr);
-        
-        int cheapestPrice = l_qr.get(0).price();
-        
-        int index = l_qr.size();
-        for(int i = 0; i < l_qr.size(); i++)
-        {
-            if(l_qr.get(i).price() == cheapestPrice)
-                continue;
-            else
-            {
-                index = i;
-                break;
-            }
-        }
-        
-        l_qr = l_qr.subList(0, index);
-        return l_qr;
-    }
-    
     public List<QueryResult> findFreeRooms(Calendar start, Calendar end, int n_persons) {
         List<QueryResult> l_qr = new ArrayList<>();
         
         if(this.rooms.isEmpty())
             return l_qr;
         
-        l_qr = findCheapestFreeRooms(start, end, n_persons);
+        List<Room> l_rooms = this.rooms;
+        Collections.sort(l_rooms);
+        
+        l_qr = findAllCombinationsRooms(l_rooms, n_persons);
+        
+        for(QueryResult qr : l_qr)
+        {
+            qr.setNights(getCountOfNights(start,end));
+        }
+        
+        l_qr = findAllCheapestCombinationsRooms(l_qr);
             
         return l_qr;
     }
