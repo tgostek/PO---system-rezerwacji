@@ -6,7 +6,6 @@
 
 package system.rezerwacji;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -161,7 +160,19 @@ public class HotelTest {
         
         
         
+        // test method void reserve(Calendar start, Calendar end, QueryResult result, Person person);
+        Person person = new Person();
+        person.setFirstName("FirstName");
+        person.setName("Name");
+        person.setAddress("Address");
+        person.setEmail("mail@com.pl");
+        
+        hotel.reserve(start, end, result.get(0), person);
+        assertEquals(false, room6.isFree(start, end));
+        //assertEquals(false, room8.isFree(start, end));
+        
         System.out.println("Test_2_2 PASS");
     }
     
+
 }

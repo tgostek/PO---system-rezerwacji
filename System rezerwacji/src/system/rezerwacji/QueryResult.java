@@ -28,13 +28,6 @@ public class QueryResult implements Comparable<QueryResult>{
         this.rooms.add(room);
     }
     
-    public void add(QueryResult qr) {
-        for(Room room : qr.rooms())
-        {
-            this.add(room);
-        }
-    }
-    
     public void setNights(int nights){
         this.nights = nights;
     }

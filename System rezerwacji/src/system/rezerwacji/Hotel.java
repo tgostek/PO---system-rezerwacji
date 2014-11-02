@@ -11,15 +11,6 @@ public class Hotel {
     //private sector
     private final List<Room> rooms;
     
-    private List<Room> getAllRoomsEqual(int p_numberOfPersons, List<Room> p_rooms)
-    {
-        List<Room> l_listRooms = new ArrayList<>();
-        for(Room room : p_rooms)
-            if(room.n_persons() == p_numberOfPersons)
-                l_listRooms.add(room);
-        return l_listRooms;
-    }
-    
     private List<Room> getAllRoomsAbove(int p_numberOfPersons, List<Room> p_rooms)
     {
         List<Room> l_listRooms = new ArrayList<>();
@@ -153,4 +144,11 @@ public class Hotel {
         return l_qr;
     }
     
-    }
+    public void reserve(Calendar start, Calendar end, QueryResult result, Person person) {
+        List<Room> rooms = result.rooms();
+        for (Room room : rooms) {
+            room.reserve(start, end, person);
+        }
+    } 
+
+}
