@@ -48,10 +48,16 @@ public class Room implements Comparable<Room>{
     
     public void reserve(Calendar start, Calendar end, Person person) {
         Reservation reservation = new Reservation(start, end, person);
-        reservations.add(reservation);
+        this.reservations.add(reservation);
     }
     
     public boolean isFree(Calendar start, Calendar end) {
+        for (Reservation reservation : this.reservations) {
+            if ( !(start.compareTo(reservation.getStart()) < 0 && start.compareTo(reservation.getEnd()) < 0)   
+               || !(end.compareTo(reservation.getStart()) > 0 && end.compareTo(reservation.getEnd()) > 0) ) {
+                return false;
+            }
+        }
         return true;
     }
     
@@ -64,6 +70,13 @@ public class Room implements Comparable<Room>{
            this.start = start;
            this.end = end;
            this.person = person;
+       }
+       
+       public Calendar getStart(){
+           return this.start;
+       }
+       public Calendar getEnd(){
+           return this.end;
        }
     }
 }
