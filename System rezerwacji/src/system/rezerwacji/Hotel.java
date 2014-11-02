@@ -66,13 +66,14 @@ public class Hotel {
             l_qr.add(qr);
         }
         
+        
         deleteAllRoomsAbove(n_persons-1, p_rooms);
+        
         
         while(p_rooms.size() > 0)
         {  
             List<Room> second_rooms = new ArrayList<>(p_rooms);
             Room room = p_rooms.get(p_rooms.size()-1);
-            
             second_rooms.remove(room);
             
             while(second_rooms.size() > 0)
@@ -129,7 +130,8 @@ public class Hotel {
         if(this.rooms.isEmpty())
             return l_qr;
         
-        List<Room> l_rooms = this.rooms;
+        //zamiast this.rooms getAllFreeRooms(start, end);
+        List<Room> l_rooms = new ArrayList<>(this.rooms);
         Collections.sort(l_rooms);
         
         l_qr = findAllCombinationsRooms(l_rooms, n_persons);

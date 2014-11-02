@@ -159,7 +159,6 @@ public class HotelTest {
         assertTrue(3  <= result.get(0).n_person());
         
         
-        
         // test method void reserve(Calendar start, Calendar end, QueryResult result, Person person);
         Person person = new Person();
         person.setFirstName("FirstName");
@@ -174,5 +173,46 @@ public class HotelTest {
         System.out.println("Test_2_2 PASS");
     }
     
+    @Test
+    public void Test_2_3() {
+        System.out.println("\nTest_2_3 START");
+        
+        Hotel hotel = new Hotel();
+        
+        Room room1 = new Room("A", 1, 100);
+        Room room2 = new Room("B", 1, 100);
+        Room room3 = new Room("C", 1, 100);
+        Room room4 = new Room("D", 1, 100);
+        
+        
+        hotel.add(room1);
+        hotel.add(room2);
+        hotel.add(room3);
+        hotel.add(room4);
+        
+        Calendar start = new GregorianCalendar(2014, 1, 1);
+        Calendar end = new GregorianCalendar(2014, 1, 2);
+        
+        List<QueryResult> result = hotel.findFreeRooms(start, end, 3);
 
+        assertEquals(3, result.size());
+        assertEquals(300, result.get(0).price());
+        assertTrue(3  <= result.get(0).n_person());
+        
+        result = hotel.findFreeRooms(start, end, 5);
+        assertEquals(0, result.size());
+        
+        Room room5 = new Room("E", 4, 100);
+        hotel.add(room5);
+        result = hotel.findFreeRooms(start, end, 5);
+        assertEquals(4, result.size());
+        
+        
+        Room room6 = new Room("F", 6, 200);
+        hotel.add(room6);
+        result = hotel.findFreeRooms(start, end, 5);
+        assertEquals(5, result.size());
+        
+        System.out.println("Test_2_3 PASS");
+    }
 }
