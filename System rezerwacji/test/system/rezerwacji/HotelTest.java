@@ -169,7 +169,7 @@ public class HotelTest {
         
         hotel.reserve(start, end, result.get(0), person);
         assertEquals(false, room6.isFree(start, end));
-        //assertEquals(false, room8.isFree(start, end));
+        assertEquals(false, room8.isFree(start, end));
         
         System.out.println("Test_2_2 PASS");
     }
