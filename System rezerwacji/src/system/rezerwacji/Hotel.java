@@ -159,4 +159,11 @@ public class Hotel {
         return l_qr;
     }
     
-    }
+    public void reserve(Calendar start, Calendar end, QueryResult result, Person person) {
+        List<Room> rooms = result.rooms();
+        for (Room room : rooms) {
+            room.reserve(start, end, person);
+        }
+    } 
+
+}

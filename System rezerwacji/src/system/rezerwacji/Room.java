@@ -11,11 +11,13 @@ public class Room implements Comparable<Room>{
     private String name;
     private int n_persons;
     private int price;
+    private final List<Reservation> reservations;
     
     public Room(String name, int n_persons, int price) {
         this.name = name;
         this.n_persons = n_persons;
         this.price = price;
+        reservations = new ArrayList<>();
     }
     
     String name() {
@@ -44,5 +46,24 @@ public class Room implements Comparable<Room>{
         return myNPerson.compareTo(oNPerson);
     }
     
+    public void reserve(Calendar start, Calendar end, Person person) {
+        Reservation reservation = new Reservation(start, end, person);
+        reservations.add(reservation);
+    }
     
+    public boolean isFree(Calendar start, Calendar end) {
+        return true;
+    }
+    
+    private class Reservation {
+       private Calendar start;
+       private Calendar end;
+       private Person person;
+       
+       public Reservation(Calendar start, Calendar end, Person person){
+           this.start = start;
+           this.end = end;
+           this.person = person;
+       }
+    }
 }
