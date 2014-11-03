@@ -15,15 +15,6 @@ public class QueryResult implements Comparable<QueryResult>{
         this.nights = 0;
     }
     
-    public boolean isRoom(Room room)
-    {
-        if(-1 == rooms.indexOf(room))
-        {
-            return false;
-        }
-        return true;
-    }
-    
     public void add(Room room) {
         this.rooms.add(room);
     }
