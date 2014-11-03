@@ -1,26 +1,40 @@
 package system.rezerwacji;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 public class QueryResult implements Comparable<QueryResult>{
     
     //private section
     private List<Room> rooms;
-    private int nights;
+    private Calendar start;
+    private Calendar end;
+    
+    private int countNights()
+    {
+        Date d1 = this.start.getTime();
+        Date d2 = this.end.getTime();
+        
+        return (int)( (d2.getTime() - d1.getTime()) / (1000 * 60 * 60 * 24));
+    }
     
     //public section
     public QueryResult() {
         this.rooms = new ArrayList<>();
-        this.nights = 0;
+        this.start = new GregorianCalendar(0, 0, 0);
+        this.end = new GregorianCalendar(0, 0, 0);
     }
     
     public void add(Room room) {
         this.rooms.add(room);
     }
     
-    public void setNights(int nights){
-        this.nights = nights;
+    public void setTime(Calendar start, Calendar end){
+        this.start = start;
+        this.end = end;
     }
     
     public List<Room> rooms() {
@@ -29,9 +43,10 @@ public class QueryResult implements Comparable<QueryResult>{
     
     public int price() {
         int price = 0;
+        int nights = this.countNights();
         for(Room room : this.rooms)
         {
-            price += room.price() * this.nights;
+            price += room.price() * nights;
         }
         return price;
     }

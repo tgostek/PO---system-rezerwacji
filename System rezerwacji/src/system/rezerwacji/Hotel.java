@@ -3,7 +3,6 @@ package system.rezerwacji;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 
 public class Hotel {
@@ -108,13 +107,6 @@ public class Hotel {
         return l_qr;
     }
     
-    public static int getCountOfNights(Calendar start, Calendar end) { 
-        Date d1 = start.getTime();
-        Date d2 = end.getTime();
-        
-        return (int)( (d2.getTime() - d1.getTime()) / (1000 * 60 * 60 * 24));
-    }
-    
     //public sector
     public Hotel() {
         rooms = new ArrayList<>();
@@ -138,7 +130,7 @@ public class Hotel {
         
         for(QueryResult qr : l_qr)
         {
-            qr.setNights(getCountOfNights(start,end));
+            qr.setTime(start,end);
         }
         
         l_qr = findAllCheapestCombinationsRooms(l_qr);
