@@ -167,8 +167,10 @@ public class HotelTest {
         person.setEmail("mail@com.pl");
         
         hotel.reserve(start, end, result.get(0), person);
-        assertEquals(false, room6.isFree(start, end));
-        assertEquals(false, room8.isFree(start, end));
+        List<Room> tmpRooms = result.get(0).rooms();
+        for (Room room: tmpRooms) {
+            assertEquals(false, room.isFree(start, end));
+        }
         
         System.out.println("Test_2_2 PASS");
     }

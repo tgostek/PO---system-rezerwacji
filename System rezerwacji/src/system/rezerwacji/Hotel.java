@@ -19,6 +19,17 @@ public class Hotel {
         return l_listRooms;
     }
     
+    private List<Room> getAllFreeRooms(Calendar start, Calendar end)
+    {
+        List<Room> l_listRooms = new ArrayList<>();
+        for (Room room : this.rooms) {
+            if (room.isFree(start, end)) {
+                l_listRooms.add(room);
+            }
+        }
+        return l_listRooms;
+    }
+    
     private void deleteAllRoomsAbove(int p_numberOfPersons, List<Room> p_listRooms)
     {
         for(int i = 0; i < p_listRooms.size();)
@@ -122,8 +133,7 @@ public class Hotel {
         if(this.rooms.isEmpty())
             return l_qr;
         
-        //zamiast this.rooms getAllFreeRooms(start, end);
-        List<Room> l_rooms = new ArrayList<>(this.rooms);
+        List<Room> l_rooms = getAllFreeRooms(start, end);
         Collections.sort(l_rooms);
         
         l_qr = findAllCombinationsRooms(l_rooms, n_persons);
