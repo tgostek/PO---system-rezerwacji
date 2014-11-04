@@ -14,10 +14,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-/**
- *
- * @author Paulina
- */
+
 public class RoomTest {
     
     public RoomTest() {
@@ -40,7 +37,7 @@ public class RoomTest {
     }
     
     @Test
-    public void Test_1_2() {
+    public void Test_1_1() {
         System.out.println("\nTest_1_1 START");
         
         Room room1 = new Room("A", 2, 180);
@@ -52,11 +49,16 @@ public class RoomTest {
         Calendar start = new GregorianCalendar(2014, 1, 1);
         Calendar end = new GregorianCalendar(2014, 1, 8);
         
+        assertEquals(true, room1.isFree(start, end));
+        
         room1.reserve(start, end, null);
         
         assertEquals(false, room1.isFree(start, end));
         
-        assertEquals(false, room1.isFree(new GregorianCalendar(2014, 1, 7), 
+        assertEquals(true, room1.isFree(new GregorianCalendar(2014, 1, 8), 
+                                        new GregorianCalendar(2014, 1, 10)));
+        
+        /*assertEquals(false, room1.isFree(new GregorianCalendar(2014, 1, 7), 
                                         new GregorianCalendar(2014, 1, 10)));
         
         assertEquals(false, room1.isFree(new GregorianCalendar(2014, 1, 1), 
@@ -72,7 +74,7 @@ public class RoomTest {
                                         new GregorianCalendar(2014, 1, 10)));
         
         assertEquals(true, room1.isFree(new GregorianCalendar(2014, 1, 9), 
-                                        new GregorianCalendar(2014, 1, 10)));
+                                        new GregorianCalendar(2014, 1, 10)));*/
         
         System.out.println("Test_1_1 PASS");
     }

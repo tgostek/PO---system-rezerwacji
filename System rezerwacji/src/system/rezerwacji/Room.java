@@ -11,13 +11,13 @@ public class Room implements Comparable<Room>{
     private String name;
     private int n_persons;
     private int price;
-    private final List<Reservation> reservations;
+    private List<Reservation> reservations;
     
     public Room(String name, int n_persons, int price) {
         this.name = name;
         this.n_persons = n_persons;
         this.price = price;
-        reservations = new ArrayList<>();
+        this.reservations = new ArrayList<>();
     }
     
     String name() {
