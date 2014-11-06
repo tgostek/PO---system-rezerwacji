@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package system.rezerwacji;
 
 import java.util.Calendar;
@@ -54,8 +50,11 @@ public class RoomTest {
         room1.reserve(start, end, null);
         
         assertEquals(false, room1.isFree(start, end));
+
+        assertEquals(true, room1.isFree(new GregorianCalendar(2014, 1, 9), 
+                                        new GregorianCalendar(2014, 1, 10)));
         
-        /*assertEquals(true, room1.isFree(new GregorianCalendar(2014, 1, 8), 
+       assertEquals(true, room1.isFree(new GregorianCalendar(2014, 1, 8),
                                         new GregorianCalendar(2014, 1, 10)));
         
         assertEquals(false, room1.isFree(new GregorianCalendar(2014, 1, 7), 
@@ -74,7 +73,7 @@ public class RoomTest {
                                         new GregorianCalendar(2014, 1, 10)));
         
         assertEquals(true, room1.isFree(new GregorianCalendar(2014, 1, 9), 
-                                        new GregorianCalendar(2014, 1, 10)));*/
+                                        new GregorianCalendar(2014, 1, 10)));
         
         System.out.println("Test_1_1 PASS");
     }
