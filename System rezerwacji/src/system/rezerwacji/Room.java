@@ -52,11 +52,18 @@ public class Room implements Comparable<Room>{
     }
     
     public boolean isFree(Calendar start, Calendar end) {
+        
         for (Reservation reservation : this.reservations) {
-            if ( !(start.compareTo(reservation.getStart()) < 0 && start.compareTo(reservation.getEnd()) < 0)   
-               || !(end.compareTo(reservation.getStart()) > 0 && end.compareTo(reservation.getEnd()) > 0) ) {
-                return false;
+            Calendar s1 = reservation.getStart();
+            Calendar e1 = reservation.getEnd();
+            
+            if(s1.before(start) && (e1.before(start) || e1.equals(start))) {
+                continue;
             }
+            if(e1.after(end) && (s1.after(end) || s1.equals(end))) {
+                continue;
+            }
+            return false;
         }
         return true;
     }
