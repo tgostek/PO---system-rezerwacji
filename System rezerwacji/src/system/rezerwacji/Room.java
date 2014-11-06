@@ -1,4 +1,3 @@
-
 package system.rezerwacji;
 
 import java.util.ArrayList;
@@ -12,6 +11,12 @@ public class Room implements Comparable<Room>{
     private int n_persons;
     private int price;
     private List<Reservation> reservations;
+    private static TableOfSeasonPrices tableOfSeasonPrices = new TableOfSeasonPrices();
+    
+    public static void setTableOfSeasonPrices(TableOfSeasonPrices tableOfSeasonPrices)
+    {
+        Room.tableOfSeasonPrices = tableOfSeasonPrices;
+    }
     
     public Room(String name, int n_persons, int price) {
         this.name = name;
@@ -24,8 +29,8 @@ public class Room implements Comparable<Room>{
         return name;
     }
     
-    int price() {
-        return price;
+    int price(Calendar day) {
+        return price + price * Room.tableOfSeasonPrices.getSeasonProcentPrice(day);
     }
     
     int n_persons() {
@@ -78,5 +83,11 @@ public class Room implements Comparable<Room>{
        public Calendar getEnd(){
            return this.end;
        }
+       
+       @Override
+        public String toString() {
+            //TODO
+            return "";
+        }
     }
 }

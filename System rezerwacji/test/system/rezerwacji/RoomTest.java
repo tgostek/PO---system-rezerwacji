@@ -44,7 +44,7 @@ public class RoomTest {
         
         assertEquals(2, room1.n_persons());
         assertEquals("A", room1.name());
-        assertEquals(180, room1.price());
+        assertEquals(180, room1.price(new GregorianCalendar(2014, 1, 1)));
         
         Calendar start = new GregorianCalendar(2014, 1, 1);
         Calendar end = new GregorianCalendar(2014, 1, 8);
@@ -55,10 +55,10 @@ public class RoomTest {
         
         assertEquals(false, room1.isFree(start, end));
         
-        assertEquals(true, room1.isFree(new GregorianCalendar(2014, 1, 8), 
+        /*assertEquals(true, room1.isFree(new GregorianCalendar(2014, 1, 8), 
                                         new GregorianCalendar(2014, 1, 10)));
         
-        /*assertEquals(false, room1.isFree(new GregorianCalendar(2014, 1, 7), 
+        assertEquals(false, room1.isFree(new GregorianCalendar(2014, 1, 7), 
                                         new GregorianCalendar(2014, 1, 10)));
         
         assertEquals(false, room1.isFree(new GregorianCalendar(2014, 1, 1), 

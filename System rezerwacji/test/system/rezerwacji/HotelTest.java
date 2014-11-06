@@ -217,4 +217,54 @@ public class HotelTest {
         
         System.out.println("Test_2_3 PASS");
     }
+    
+    @Test
+    public void Test_3_3() {
+        System.out.println("\nTest_3_3 START");
+        
+        TableOfSeasonPrices tableOfSeasonPrices = new TableOfSeasonPrices();
+        
+        Calendar start = new GregorianCalendar(2014, 1, 1);
+        Calendar end = new GregorianCalendar(2014, 4, 1);
+        
+        tableOfSeasonPrices.addItemSeasonPrices(start, end, 10);
+        tableOfSeasonPrices.addItemSeasonPrices(end, new GregorianCalendar(2014, 4, 15), 100);
+        
+        Hotel hotel = new Hotel();
+        hotel.setTableOfSeasonPrices(tableOfSeasonPrices);
+        Room room1 = new Room("F", 2, 200);
+        hotel.add(room1);
+        
+        List<QueryResult> result = hotel.findFreeRooms(new GregorianCalendar(2014, 1, 1), 
+                                                       new GregorianCalendar(2014, 1, 3),
+                                                       2);
+        assertEquals(1, result.size());
+        assertEquals((440), result.get(0).price());
+        
+        result = hotel.findFreeRooms(new GregorianCalendar(2014, 3, 31), 
+                                     new GregorianCalendar(2014, 4, 2),
+                                     2);
+        
+        assertEquals(1, result.size());
+        assertEquals((420), result.get(0).price());
+        
+        result = hotel.findFreeRooms(new GregorianCalendar(2014, 0, 31), 
+                                     new GregorianCalendar(2014, 1, 2),
+                                     2);
+        
+        assertEquals(1, result.size());
+        assertEquals((620), result.get(0).price());
+        
+        result = hotel.findFreeRooms(new GregorianCalendar(2014, 0, 2), 
+                                     new GregorianCalendar(2014, 0, 4),
+                                     2);
+        
+        assertEquals(1, result.size());
+        assertEquals((200), result.get(0).price());
+        
+        
+        
+        
+        System.out.println("Test_3_3 PASS");
+    }
 }

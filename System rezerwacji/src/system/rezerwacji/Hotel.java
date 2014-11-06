@@ -10,6 +10,11 @@ public class Hotel {
     //private sector
     private final List<Room> rooms;
     
+    public void setTableOfSeasonPrices(TableOfSeasonPrices tableOfSeasonPrices)
+    {
+        Room.setTableOfSeasonPrices(tableOfSeasonPrices);
+    }
+    
     private List<Room> getAllRoomsAbove(int p_numberOfPersons, List<Room> p_rooms)
     {
         List<Room> l_listRooms = new ArrayList<>();

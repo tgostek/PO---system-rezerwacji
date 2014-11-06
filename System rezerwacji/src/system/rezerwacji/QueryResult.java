@@ -13,13 +13,6 @@ public class QueryResult implements Comparable<QueryResult>{
     private Calendar start;
     private Calendar end;
     
-    private int countNights()
-    {
-        Date d1 = this.start.getTime();
-        Date d2 = this.end.getTime();
-        
-        return (int)( (d2.getTime() - d1.getTime()) / (1000 * 60 * 60 * 24));
-    }
     
     //public section
     public QueryResult() {
@@ -43,11 +36,18 @@ public class QueryResult implements Comparable<QueryResult>{
     
     public int price() {
         int price = 0;
-        int nights = this.countNights();
         for(Room room : this.rooms)
         {
-            price += room.price() * nights;
+            for(Calendar day = new GregorianCalendar(this.start.get(Calendar.YEAR), 
+                                                     this.start.get(Calendar.MONTH), 
+                                                     this.start.get(Calendar.DAY_OF_MONTH));
+                                    false == day.equals(this.end); 
+                                    day.add(Calendar.DATE, 1))
+            {
+                price += room.price(day);
+            }
         }
+        
         return price;
     }
     
