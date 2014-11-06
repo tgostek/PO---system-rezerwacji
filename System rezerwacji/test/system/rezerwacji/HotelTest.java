@@ -137,6 +137,7 @@ public class HotelTest {
         Room room8 = new Room("CF", 2, 150);
         Room room9 = new Room("CG", 1, 100);
         Room room10 = new Room("CH", 1, 100);
+        Room room11 = new Room("CI", 5, 1000);
         
         hotel.add(room1);
         hotel.add(room2);
@@ -148,6 +149,7 @@ public class HotelTest {
         hotel.add(room8);
         hotel.add(room9);
         hotel.add(room10);
+        hotel.add(room11);
         
         Calendar start = new GregorianCalendar(2014, 1, 1);
         Calendar end = new GregorianCalendar(2014, 1, 2);
@@ -171,7 +173,7 @@ public class HotelTest {
         for (Room room: tmpRooms) {
             assertEquals(false, room.isFree(start, end));
         }
-        
+        assertEquals(true, room11.isFree(start, end));
         System.out.println("Test_2_2 PASS");
     }
     
