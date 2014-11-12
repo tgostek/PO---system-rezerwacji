@@ -54,7 +54,7 @@ public class RoomTest {
         assertEquals(true, room1.isFree(new GregorianCalendar(2014, 1, 9), 
                                         new GregorianCalendar(2014, 1, 10)));
         
-       assertEquals(true, room1.isFree(new GregorianCalendar(2014, 1, 8),
+        assertEquals(true, room1.isFree(new GregorianCalendar(2014, 1, 8),
                                         new GregorianCalendar(2014, 1, 10)));
         
         assertEquals(false, room1.isFree(new GregorianCalendar(2014, 1, 7), 

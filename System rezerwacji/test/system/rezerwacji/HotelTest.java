@@ -221,8 +221,8 @@ public class HotelTest {
     }
     
     @Test
-    public void Test_3_3() {
-        System.out.println("\nTest_3_3 START");
+    public void Test_3_1() {
+        System.out.println("\nTest_3_1 START");
         
         TableOfSeasonPrices tableOfSeasonPrices = new TableOfSeasonPrices();
         
@@ -264,9 +264,6 @@ public class HotelTest {
         assertEquals(1, result.size());
         assertEquals((200), result.get(0).price());
         
-        
-        
-        
-        System.out.println("Test_3_3 PASS");
+        System.out.println("Test_3_1 PASS");
     }
 }
