@@ -224,16 +224,16 @@ public class HotelTest {
     public void Test_3_1() {
         System.out.println("\nTest_3_1 START");
         
-        TableOfSeasonPrices tableOfSeasonPrices = new TableOfSeasonPrices();
+        TableOfSesonProcentPrice tableOfSesonProcentPrice = new TableOfSesonProcentPrice();
         
         Calendar start = new GregorianCalendar(2014, 1, 1);
         Calendar end = new GregorianCalendar(2014, 4, 1);
         
-        tableOfSeasonPrices.addItemSeasonPrices(start, end, 10);
-        tableOfSeasonPrices.addItemSeasonPrices(end, new GregorianCalendar(2014, 4, 15), 100);
+        tableOfSesonProcentPrice.addIRecord(start, end, 10);
+        tableOfSesonProcentPrice.addIRecord(end, new GregorianCalendar(2014, 4, 15), 100);
         
         Hotel hotel = new Hotel();
-        hotel.setTableOfSeasonPrices(tableOfSeasonPrices);
+        hotel.setTableOfSesonProcentPrice(tableOfSesonProcentPrice);
         Room room1 = new Room("F", 2, 200);
         hotel.add(room1);
         

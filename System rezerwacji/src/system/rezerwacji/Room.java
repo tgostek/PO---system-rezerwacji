@@ -11,11 +11,11 @@ public class Room implements Comparable<Room>{
     private int n_persons;
     private int price;
     private List<Reservation> reservations;
-    private static TableOfSeasonPrices tableOfSeasonPrices = new TableOfSeasonPrices();
+    private static TableOfSesonProcentPrice tableOfSesonProcentPrice = new TableOfSesonProcentPrice();
     
-    public static void setTableOfSeasonPrices(TableOfSeasonPrices tableOfSeasonPrices)
+    public static void setTableOfSesonProcentPrice(TableOfSesonProcentPrice tableOfSesonProcentPrice)
     {
-        Room.tableOfSeasonPrices = tableOfSeasonPrices;
+        Room.tableOfSesonProcentPrice = tableOfSesonProcentPrice;
     }
     
     public Room(String name, int n_persons, int price) {
@@ -30,7 +30,7 @@ public class Room implements Comparable<Room>{
     }
     
     int price(Calendar day) {
-        return price + price * Room.tableOfSeasonPrices.getSeasonProcentPrice(day);
+        return price + price * Room.tableOfSesonProcentPrice.getSeasonProcentPrice(day);
     }
     
     int n_persons() {

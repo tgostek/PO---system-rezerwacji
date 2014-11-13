@@ -5,36 +5,36 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class TableOfSeasonPrices 
+public class TableOfSesonProcentPrice 
 {
-    private List<ItemSeasonPrices> tableOfSeasonPrices;
+    private List<Record> records;
     
-    public TableOfSeasonPrices()
+    public TableOfSesonProcentPrice()
     {
-        this.tableOfSeasonPrices = new ArrayList<>();
+        this.records = new ArrayList<>();
     }
     
-    public void addItemSeasonPrices(Calendar start, Calendar end, int procent)
+    public void addIRecord(Calendar start, Calendar end, int procent)
     {
         // jesli sie naklada zwroc warning i nie dodawaj
-        tableOfSeasonPrices.add(new ItemSeasonPrices(start, end, procent));
+        records.add(new Record(start, end, procent));
     }
     
     public int getSeasonProcentPrice(Calendar day)
     {
-        if(tableOfSeasonPrices.isEmpty())
+        if(records.isEmpty())
             return 0;
         //TODO
         return 0;
     }
     
-    public class ItemSeasonPrices
+    public class Record
     {
         private Calendar start;
         private Calendar end;
         private int procent;
         
-        ItemSeasonPrices(Calendar start, Calendar end, int procent)
+        Record(Calendar start, Calendar end, int procent)
         {
             this.start = start;
             this.end = end;
