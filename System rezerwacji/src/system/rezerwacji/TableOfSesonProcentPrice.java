@@ -22,9 +22,21 @@ public class TableOfSesonProcentPrice
     
     public int getSeasonProcentPrice(Calendar day)
     {
+        
         if(records.isEmpty())
             return 0;
-        //TODO
+        
+        for(Record record : this.records)
+        {
+            
+            if(day.before(record.getStart()) || day.after(record.getEnd()) || day.equals(record.getEnd()))
+            {
+                continue;
+            }
+            
+            
+            return record.getProcent();
+        }
         return 0;
     }
     

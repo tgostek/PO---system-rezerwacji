@@ -233,8 +233,10 @@ public class HotelTest {
         tableOfSesonProcentPrice.addIRecord(end, new GregorianCalendar(2014, 4, 15), 100);
         
         Hotel hotel = new Hotel();
-        hotel.setTableOfSesonProcentPrice(tableOfSesonProcentPrice);
+        
         Room room1 = new Room("F", 2, 200);
+        
+        room1.setTableOfSesonProcentPrice(tableOfSesonProcentPrice);
         hotel.add(room1);
         
         List<QueryResult> result = hotel.findFreeRooms(new GregorianCalendar(2014, 1, 1), 
@@ -243,26 +245,28 @@ public class HotelTest {
         assertEquals(1, result.size());
         assertEquals((440), result.get(0).price());
         
-        result = hotel.findFreeRooms(new GregorianCalendar(2014, 3, 31), 
+        
+        result = hotel.findFreeRooms(new GregorianCalendar(2014, 3, 30), 
                                      new GregorianCalendar(2014, 4, 2),
                                      2);
         
         assertEquals(1, result.size());
-        assertEquals((420), result.get(0).price());
+        assertEquals((620), result.get(0).price());
+        
         
         result = hotel.findFreeRooms(new GregorianCalendar(2014, 0, 31), 
                                      new GregorianCalendar(2014, 1, 2),
                                      2);
         
         assertEquals(1, result.size());
-        assertEquals((620), result.get(0).price());
+        assertEquals((420), result.get(0).price());
         
         result = hotel.findFreeRooms(new GregorianCalendar(2014, 0, 2), 
                                      new GregorianCalendar(2014, 0, 4),
                                      2);
         
         assertEquals(1, result.size());
-        assertEquals((200), result.get(0).price());
+        assertEquals((400), result.get(0).price());
         
         System.out.println("Test_3_1 PASS");
     }
