@@ -20,7 +20,13 @@ public class Union implements Shape{
 
     @Override
     public boolean contains(float x, float y) {
-        return ( shape1.contains(x, y) || shape2.contains(x, y) );
+        boolean isContains = ( shape1.contains(x, y) || shape2.contains(x, y) );
+        System.out.println("Punkt:" + x + " " + y + "    " + isContains + "   " + this);
+        return isContains;
     }
     
+    @Override
+    public String toString() {
+        return "Union(" + this.shape1 + "," + this.shape2 + ")";
+    }
 }

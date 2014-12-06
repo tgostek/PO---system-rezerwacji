@@ -23,7 +23,13 @@ public class Translated implements Shape{
     
     @Override
     public boolean contains(float x, float y) {
-        return shape.contains(x - this.x, y - this.y);
+        boolean isContains = shape.contains(x - this.x, y - this.y);
+        System.out.println("Punkt:" + x + " " + y + "    " + isContains + "   " + this);
+        return isContains;
     }
     
+    @Override
+    public String toString() {
+        return "Translated(" + this.x + "," + this.y + ","  + this.shape+ ")";
+    }
 }

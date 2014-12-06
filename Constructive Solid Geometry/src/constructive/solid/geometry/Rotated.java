@@ -30,6 +30,14 @@ public class Rotated implements Shape{
         
         float x2 = (float) ((x - this.x) * cos(360.0 - angle) - (y - this.y) * sin(360.0 - angle));
         float y2 = (float) ((x - this.x) * sin(360.0 - angle) + (y - this.y) * cos(360.0 - angle));
-        return shape.contains(x2, y2);
+        
+        boolean isContains = shape.contains(x2, y2);
+        System.out.println("Punkt:" + x + " " + y + "    " + isContains + "   " + this);
+        return isContains;
+    }
+    
+    @Override
+    public String toString() {
+        return "Rotated(" + this.x + "," + this.y + "," + this.angle + "," + this.shape+ ")";
     }
 }

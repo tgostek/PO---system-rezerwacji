@@ -20,7 +20,13 @@ public class Ellipse implements Shape{
     
     @Override
     public boolean contains(float x, float y) {
-        return ( pow(x,2)/pow(a,2) + pow(y,2)/pow(b,2) <= 1 ) ;
+        boolean isContains = ( pow(x,2)/pow(a,2) + pow(y,2)/pow(b,2) <= 1 ) ;
+        System.out.println("Punkt:" + x + " " + y + "    " + isContains + "   " + this);
+        return isContains;
     }
     
+    @Override
+    public String toString() {
+        return "Elipse(" + this.a + "," + this.b + ")";
+    }
 }

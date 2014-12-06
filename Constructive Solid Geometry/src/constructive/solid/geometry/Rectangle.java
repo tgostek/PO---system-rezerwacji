@@ -20,7 +20,13 @@ public class Rectangle implements Shape {
     
     @Override
     public boolean contains(float x, float y) {
-        return ( ( (-a/2) <= x && x <= (a/2) ) && ( (-b/2) <= y && y <= (b/2) ) );
+        boolean isContains = ( ( (-a/2) <= x && x <= (a/2) ) && ( (-b/2) <= y && y <= (b/2) ) );
+        System.out.println("Punkt:" + x + " " + y + "    " + isContains + "   " + this);
+        return isContains;
     }
     
+    @Override
+    public String toString() {
+        return "Rectangle(" + this.a + "," + this.b + ")";
+    }
 }

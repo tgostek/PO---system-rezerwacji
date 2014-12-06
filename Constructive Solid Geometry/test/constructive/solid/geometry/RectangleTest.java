@@ -55,6 +55,8 @@ public class RectangleTest {
         assertEquals(true, instance.contains(-1.0f, 2.0f));
         assertEquals(false, instance.contains(-3.0f, 0));
         
+        assertEquals(true, (new Rectangle(6, 12)).contains(-0.05539f, -2.936f));
+        
     }
     
 }
