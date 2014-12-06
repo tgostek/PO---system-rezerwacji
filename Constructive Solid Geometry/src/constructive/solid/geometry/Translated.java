@@ -12,13 +12,18 @@ package constructive.solid.geometry;
  */
 public class Translated implements Shape{
     
+    private Shape shape;
+    private float x, y;
+    
     public Translated(float x, float y, Shape shape) {
-        
+        this.x = x;
+        this.y = y;
+        this.shape = shape;
     }
     
     @Override
     public boolean contains(float x, float y) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return shape.contains(x - this.x, y - this.y);
     }
     
 }
