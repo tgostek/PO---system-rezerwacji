@@ -8,6 +8,7 @@ package constructive.solid.geometry;
 
 import static java.lang.Math.cos;
 import static java.lang.Math.sin;
+import static java.lang.Math.toDegrees;
 
 /**
  *
@@ -22,14 +23,15 @@ public class Rotated implements Shape{
         this.x = x;
         this.y = y;
         this.angle = angle;
+        
         this.shape = shape;
     }
 
     @Override
     public boolean contains(float x, float y) {
         
-        float x2 = (float) ((x - this.x) * cos(360.0 - angle) - (y - this.y) * sin(360.0 - angle));
-        float y2 = (float) ((x - this.x) * sin(360.0 - angle) + (y - this.y) * cos(360.0 - angle));
+        float x2 = (float) ((x - this.x) * cos(-angle) - (y - this.y) * sin(-angle));
+        float y2 = (float) ((x - this.x) * sin(-angle) + (y - this.y) * cos(-angle));
         
         boolean isContains = shape.contains(x2, y2);
         System.out.println("Punkt:" + x + " " + y + "    " + isContains + "   " + this);
