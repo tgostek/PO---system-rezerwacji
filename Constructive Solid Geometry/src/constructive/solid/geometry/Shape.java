@@ -12,6 +12,7 @@ package constructive.solid.geometry;
  */
 public interface Shape {
     public boolean contains(float x, float y);
+    public void accept(Visitor visitor, String text);
 }
 
 /*

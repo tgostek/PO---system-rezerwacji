@@ -15,6 +15,8 @@ public class Translated implements Shape{
     private Shape shape;
     private float x, y;
     
+    Shape getShape(){return this.shape;}
+    
     public Translated(float x, float y, Shape shape) {
         this.x = x;
         this.y = y;
@@ -31,5 +33,10 @@ public class Translated implements Shape{
     @Override
     public String toString() {
         return "Translated(" + this.x + "," + this.y + ","  + this.shape+ ")";
+    }
+
+    @Override
+    public void accept(Visitor visitor, String text) {
+        visitor.visit(this, text);
     }
 }

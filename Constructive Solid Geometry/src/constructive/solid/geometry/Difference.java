@@ -14,6 +14,9 @@ public class Difference implements Shape{
     
     private Shape shape1, shape2;
     
+    Shape getShape1(){return this.shape1;}
+    Shape getShape2(){return this.shape2;}
+    
     public Difference(Shape shape1, Shape shape2) {
         this.shape1 = shape1;
         this.shape2 = shape2;
@@ -30,4 +33,10 @@ public class Difference implements Shape{
     public String toString() {
         return "Difference(" + this.shape1 + "," + this.shape2 + ")";
     }
+
+    @Override
+    public void accept(Visitor visitor, String text) {
+        visitor.visit(this, text);
+    }
+    
 }

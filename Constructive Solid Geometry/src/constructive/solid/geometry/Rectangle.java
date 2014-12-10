@@ -29,4 +29,11 @@ public class Rectangle implements Shape {
     public String toString() {
         return "Rectangle(" + this.a + "," + this.b + ")";
     }
+
+    @Override
+    public void accept(Visitor visitor, String text) {
+        visitor.visit(this, text);
+    }
+    
+    
 }

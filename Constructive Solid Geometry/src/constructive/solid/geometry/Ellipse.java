@@ -29,4 +29,10 @@ public class Ellipse implements Shape{
     public String toString() {
         return "Elipse(" + this.a + "," + this.b + ")";
     }
+
+    @Override
+    public void accept(Visitor visitor, String text) {
+        visitor.visit(this, text);
+    }
+    
 }

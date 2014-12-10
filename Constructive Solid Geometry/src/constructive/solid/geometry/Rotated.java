@@ -19,6 +19,8 @@ public class Rotated implements Shape{
     private Shape shape;
     private float x, y, angle;
     
+    Shape getShape(){return this.shape;}
+    
     public Rotated(float x, float y, float angle, Shape shape) {
         this.x = x;
         this.y = y;
@@ -42,4 +44,10 @@ public class Rotated implements Shape{
     public String toString() {
         return "Rotated(" + this.x + "," + this.y + "," + this.angle + "," + this.shape+ ")";
     }
+
+    @Override
+    public void accept(Visitor visitor, String text) {
+        visitor.visit(this, text);
+    }
+    
 }

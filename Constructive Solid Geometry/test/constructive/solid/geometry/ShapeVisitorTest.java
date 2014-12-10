@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package constructive.solid.geometry;
 
 import org.junit.After;
@@ -15,11 +14,11 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author tomaszgostek
+ * @author sarka
  */
-public class ConstructiveSolidGeometryTest {
+public class ShapeVisitorTest {
     
-    public ConstructiveSolidGeometryTest() {
+    public ShapeVisitorTest() {
     }
     
     @BeforeClass
@@ -38,12 +37,9 @@ public class ConstructiveSolidGeometryTest {
     public void tearDown() {
     }
 
-    /**
-     * Test of main method, of class ConstructiveSolidGeometry.
-     */
     @Test
-    public void testContains() throws Exception {
-
+    public void testVisitor() throws Exception 
+    {
         Shape yy = new Rotated(0, 0, (float) Math.PI,
                 new Difference(
                         new Union(
@@ -68,23 +64,10 @@ public class ConstructiveSolidGeometryTest {
         Shape test = new Difference(
                 new Rotated(0, 0, (float) Math.PI / 6, new Ellipse(12, 8)),
                 yy);
-
-
-        assertTrue(test.contains(-0.05539f, -2.936f));
-        assertTrue(test.contains(-6.112f, -6.85f));
-        assertTrue(test.contains(0.01846f, -3.6f));
-        assertTrue(test.contains(4.376f, 8.069f));
-        assertTrue(test.contains(8.438f, 0.9786f));
-
-        assertFalse(test.contains(2.825f, -0.3508f));
-        assertFalse(test.contains(7.626f, -7.884f));
-        assertFalse(test.contains(0.09232f, 3.047f));
-        assertFalse(test.contains(-6.629f, 1.496f));
-        assertFalse(test.contains(-0.277f, -5.004f));
-        assertFalse(test.contains(-2.049f, -3.674f));
-
+        
+        Visitor v = new ShapeVisitor();
+        test.accept(v, "");
     }
-    
-    
-    
+
+   
 }

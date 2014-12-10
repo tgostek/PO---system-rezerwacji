@@ -13,6 +13,9 @@ package constructive.solid.geometry;
 public class Intersection implements Shape{
     private Shape shape1, shape2;
     
+    Shape getShape1(){return this.shape1;}
+    Shape getShape2(){return this.shape2;}
+    
     public Intersection(Shape shape1, Shape shape2) {
         this.shape1 = shape1;
         this.shape2 = shape2;
@@ -29,4 +32,10 @@ public class Intersection implements Shape{
     public String toString() {
         return "Intersection(" + this.shape1 + "," + this.shape2 + ")";
     }
+
+    @Override
+    public void accept(Visitor visitor, String text) {
+        visitor.visit(this, text);
+    }
+    
 }
