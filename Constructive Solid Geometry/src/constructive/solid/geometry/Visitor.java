@@ -11,12 +11,12 @@ package constructive.solid.geometry;
  */
 public interface Visitor
 {
-    public void visit(Difference shape, String text);
-    public void visit(Ellipse shape, String text);
-    public void visit(Intersection shape, String text);
-    public void visit(Rectangle shape, String text);
-    public void visit(Rotated shape, String text);
-    public void visit(Translated shape, String text);
-    public void visit(Union shape, String text);
+    public String visit(Difference shape);
+    public String visit(Ellipse shape);
+    public String visit(Intersection shape);
+    public String visit(Rectangle shape);
+    public String visit(Rotated shape);
+    public String visit(Translated shape);
+    public String visit(Union shape);
     
 }

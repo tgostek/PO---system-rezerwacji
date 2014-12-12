@@ -47,7 +47,9 @@ public class Rotated implements Shape{
 
     @Override
     public void accept(Visitor visitor, String text) {
-        visitor.visit(this, text);
+        System.out.println(text + visitor.visit(this));
+        
+        getShape().accept(visitor, text + "\t");
     }
     
 }

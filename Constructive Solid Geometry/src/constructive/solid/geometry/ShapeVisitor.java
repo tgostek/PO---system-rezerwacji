@@ -11,47 +11,44 @@ package constructive.solid.geometry;
  */
 public class ShapeVisitor implements Visitor{
     
-   
-    public void visit(Difference shape, String text)
+    @Override
+    public String visit(Difference shape)
     {
-        System.out.println(text + "Difference");
-        shape.getShape1().accept(this, text + "\t");
-        shape.getShape2().accept(this, text + "\t");
+        return "Difference";
     }
     
-    public void visit(Ellipse shape, String text)
+    @Override
+    public String visit(Ellipse shape)
     {
-        System.out.println(text + "Ellipse");
+        return "Ellipse";
     }
-    public void visit(Rectangle shape, String text)
+    @Override
+    public String visit(Rectangle shape)
     {
-        System.out.println(text + "Rectangle");
-    }
-    
-    public void visit(Intersection shape, String text)
-    {
-        System.out.println(text + "Intersection");
-        shape.getShape1().accept(this, text + "\t");
-        shape.getShape2().accept(this, text + "\t");
+        return "Rectangle";
     }
     
-    public void visit(Union shape, String text)
+    @Override
+    public String visit(Intersection shape)
     {
-        System.out.println(text +  "Union");
-        shape.getShape1().accept(this, text + "\t");
-        shape.getShape2().accept(this, text + "\t");
+        return "Intersection";
     }
     
-    
-    public void visit(Rotated shape, String text)
+    @Override
+    public String visit(Union shape)
     {
-       System.out.println(text + "Rotated");
-       shape.getShape().accept(this, text + "\t"); 
+        return "Union";
     }
     
-    public void visit(Translated shape, String text)
+    @Override
+    public String visit(Rotated shape)
     {
-       System.out.println(text + "Translated");
-       shape.getShape().accept(this, text + "\t");
+       return "Rotated";
+    }
+    
+    @Override
+    public String visit(Translated shape)
+    {
+       return "Translated";
     }
 }

@@ -35,7 +35,10 @@ public class Intersection implements Shape{
 
     @Override
     public void accept(Visitor visitor, String text) {
-        visitor.visit(this, text);
+        System.out.println(text + visitor.visit(this));
+        
+        getShape1().accept(visitor, text + "\t");
+        getShape2().accept(visitor, text + "\t");
     }
     
 }
