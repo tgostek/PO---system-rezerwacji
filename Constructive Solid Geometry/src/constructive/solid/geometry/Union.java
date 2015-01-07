@@ -6,13 +6,17 @@
 
 package constructive.solid.geometry;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 /**
  *
  * @author tomaszgostek
  */
-public class Union implements Shape{
+public class Union implements Shape, Iterable{
     private Shape shape1, shape2;
-    
+    private List<Shape> children = new ArrayList();
     Shape getShape1(){return this.shape1;}
     Shape getShape2(){return this.shape2;}
     
@@ -39,5 +43,15 @@ public class Union implements Shape{
         
         getShape1().accept(visitor, text + "\t");
         getShape2().accept(visitor, text + "\t");
+    }
+    
+    @Override 
+    public Iterator<Shape> iterator() {
+        return new IteratorShape(this);
+    }
+
+    @Override
+    public List<Shape> getChildren() {
+        return this.children;
     }
 }

@@ -7,11 +7,15 @@
 package constructive.solid.geometry;
 
 import static java.lang.Math.pow;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 /**
  *
  * @author tomaszgostek
  */
 public class Ellipse implements Shape{
+    private List<Shape> children = new ArrayList();
     public float a,b;
     public Ellipse(float a, float b) {
         this.a = a;
@@ -33,6 +37,16 @@ public class Ellipse implements Shape{
     @Override
     public void accept(Visitor visitor, String text) {
         System.out.println(text + visitor.visit(this));
+    }
+
+    @Override 
+    public Iterator<Shape> iterator() {
+        return new IteratorShape(this);
+    }
+
+    @Override
+    public List<Shape> getChildren() {
+        return this.children;
     }
     
 }

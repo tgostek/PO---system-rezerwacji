@@ -9,13 +9,16 @@ package constructive.solid.geometry;
 import static java.lang.Math.cos;
 import static java.lang.Math.sin;
 import static java.lang.Math.toDegrees;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  *
  * @author tomaszgostek
  */
 public class Rotated implements Shape{
-    
+    private List<Shape> children = new ArrayList();
     private Shape shape;
     private float x, y, angle;
     
@@ -50,6 +53,16 @@ public class Rotated implements Shape{
         System.out.println(text + visitor.visit(this));
         
         getShape().accept(visitor, text + "\t");
+    }
+
+    @Override 
+    public Iterator<Shape> iterator() {
+        return new IteratorShape(this);
+    }
+
+    @Override
+    public List<Shape> getChildren() {
+        return this.children;
     }
     
 }

@@ -5,12 +5,13 @@
  */
 package constructive.solid.geometry;
 
+import java.util.Iterator;
 import org.junit.After;
 import org.junit.AfterClass;
+import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
@@ -67,6 +68,13 @@ public class ShapeVisitorTest {
         
         Visitor v = new ShapeVisitor();
         test.accept(v, "");
+        
+        Iterator<Shape> i = test.iterator();
+        
+        while(i.hasNext()) {
+            Shape s = i.next();
+            System.out.println(s);
+        }
     }
 
    
