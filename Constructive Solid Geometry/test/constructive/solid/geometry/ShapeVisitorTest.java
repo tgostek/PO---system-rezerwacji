@@ -1,42 +1,24 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package constructive.solid.geometry;
 
-import java.util.Iterator;
-import org.junit.After;
-import org.junit.AfterClass;
 import static org.junit.Assert.*;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.*;
 
-/**
- *
- * @author sarka
- */
 public class ShapeVisitorTest {
     
-    public ShapeVisitorTest() {
-    }
+    public ShapeVisitorTest() { }
     
     @BeforeClass
-    public static void setUpClass() {
-    }
+    public static void setUpClass() {}
     
     @AfterClass
-    public static void tearDownClass() {
-    }
+    public static void tearDownClass() {}
     
     @Before
-    public void setUp() {
-    }
+    public void setUp() {}
     
     @After
-    public void tearDown() {
-    }
+    public void tearDown() {}
 
     @Test
     public void testVisitor() throws Exception 
@@ -66,16 +48,7 @@ public class ShapeVisitorTest {
                 new Rotated(0, 0, (float) Math.PI / 6, new Ellipse(12, 8)),
                 yy);
         
-        Visitor v = new ShapeVisitor();
-        test.accept(v, "");
-        
-        Iterator<Shape> i = test.iterator();
-        
-        while(i.hasNext()) {
-            Shape s = i.next();
-            System.out.println(s);
-        }
+        Visitator v = new ShapeVisitator();
+        test.accept(v);
     }
-
-   
 }

@@ -1,48 +1,28 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 package constructive.solid.geometry;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.*;
 import static org.junit.Assert.*;
 
-/**
- *
- * @author tomaszgostek
- */
-public class ConstructiveSolidGeometryTest {
+public class YYTest {
     
-    public ConstructiveSolidGeometryTest() {
-    }
+    public YYTest() {}
     
     @BeforeClass
-    public static void setUpClass() {
-    }
+    public static void setUpClass() {}
     
     @AfterClass
-    public static void tearDownClass() {
-    }
+    public static void tearDownClass() {}
     
     @Before
-    public void setUp() {
-    }
+    public void setUp() {}
     
     @After
-    public void tearDown() {
-    }
-
-    /**
-     * Test of main method, of class ConstructiveSolidGeometry.
-     */
+    public void tearDown() {}
+    
     @Test
-    public void testContains() throws Exception {
+    public void testContains() throws Exception 
+    {
 
         Shape yy = new Rotated(0, 0, (float) Math.PI,
                 new Difference(
@@ -66,8 +46,8 @@ public class ConstructiveSolidGeometryTest {
                 ));
 
         Shape test = new Difference(
-                new Rotated(0, 0, (float) Math.PI / 6, new Ellipse(12, 8)),
-                yy);
+                        new Rotated(0, 0, (float) Math.PI / 6, new Ellipse(12, 8)),
+                        yy);
 
 
         assertTrue(test.contains(-0.05539f, -2.936f));
@@ -84,7 +64,4 @@ public class ConstructiveSolidGeometryTest {
         assertFalse(test.contains(-2.049f, -3.674f));
 
     }
-    
-    
-    
 }
