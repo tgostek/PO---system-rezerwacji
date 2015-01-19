@@ -1,14 +1,8 @@
 
-package system.rezerwacji;
-
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import java.util.*;
+import org.junit.*;
 import static org.junit.Assert.*;
+import reservationsystem.Room;
 
 
 public class RoomTest {
@@ -36,11 +30,10 @@ public class RoomTest {
     public void Test_1_1() {
         System.out.println("\nTest_1_1 START");
         
-        Room room1 = new Room("A", 2, 180);
+        Room room1 = new Room("A", 2);
         
         assertEquals(2, room1.n_persons());
         assertEquals("A", room1.name());
-        assertEquals(180, room1.price(new GregorianCalendar(2014, 1, 1)));
         
         Calendar start = new GregorianCalendar(2014, 1, 1);
         Calendar end = new GregorianCalendar(2014, 1, 8);
