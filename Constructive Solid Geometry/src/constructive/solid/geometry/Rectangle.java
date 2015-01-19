@@ -1,7 +1,10 @@
 
 package constructive.solid.geometry;
 
-public class Rectangle implements Shape 
+import java.util.ArrayList;
+import java.util.List;
+
+public class Rectangle extends ShapeBase
 {
     private float a,b;
     
@@ -20,5 +23,18 @@ public class Rectangle implements Shape
     public void accept(Visitator v) 
     {
         v.visit(this);
+    }
+    
+    @Override
+    public String toString() 
+    {
+        return "Rectangle(" + this.a + ", " + this.b + ")";
+    }
+
+    @Override
+    public List getShapes() 
+    {
+        List<Shape> shapes = new ArrayList<>();
+        return shapes;
     }
 }

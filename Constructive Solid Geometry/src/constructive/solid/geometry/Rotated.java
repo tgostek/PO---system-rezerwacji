@@ -3,8 +3,11 @@ package constructive.solid.geometry;
 
 import static java.lang.Math.cos;
 import static java.lang.Math.sin;
+import java.util.ArrayList;
+import java.util.List;
 
-public class Rotated implements Shape{
+public class Rotated extends ShapeBase
+{
     private Shape shape;
     private float x, y, angle;
     
@@ -25,7 +28,6 @@ public class Rotated implements Shape{
         float y2 = (float) ((x - this.x) * sin(-angle) + (y - this.y) * cos(-angle));
         
         boolean isContains = shape.contains(x2, y2);
-        System.out.println("Punkt:" + x + " " + y + "    " + isContains + "   " + this);
         return isContains;
     }
 
@@ -33,5 +35,19 @@ public class Rotated implements Shape{
     public void accept(Visitator v) 
     {
         v.visit(this);
+    }
+    
+    @Override
+    public String toString() 
+    {
+        return "Rotated(" + this.x + ", " + this.y + ", " + this.angle + ")";
+    }
+
+    @Override
+    public List getShapes() 
+    {
+        List<Shape> shapes = new ArrayList<>();
+        shapes.add(this.shape);
+        return shapes;
     }
 }

@@ -1,7 +1,10 @@
 
 package constructive.solid.geometry;
 
-public class Intersection implements Shape
+import java.util.ArrayList;
+import java.util.List;
+
+public class Intersection extends ShapeBase
 {
     private Shape shape1, shape2;
     
@@ -25,5 +28,18 @@ public class Intersection implements Shape
         v.visit(this);
     }
     
-    
+    @Override
+    public String toString() 
+    {
+        return "Intersection";
+    }
+
+    @Override
+    public List getShapes() 
+    {
+        List<Shape> shapes = new ArrayList<>();
+        shapes.add(this.shape1);
+        shapes.add(this.shape2);
+        return shapes;
+    }
 }

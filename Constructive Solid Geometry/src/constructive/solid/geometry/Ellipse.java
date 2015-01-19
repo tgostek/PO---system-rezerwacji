@@ -2,8 +2,10 @@
 package constructive.solid.geometry;
 
 import static java.lang.Math.pow;
+import java.util.ArrayList;
+import java.util.List;
 
-public class Ellipse implements Shape
+public class Ellipse extends ShapeBase
 {
     private float a,b;
     
@@ -22,5 +24,18 @@ public class Ellipse implements Shape
     public void accept(Visitator v) 
     {
         v.visit(this);
+    }
+    
+    @Override
+    public String toString() 
+    {
+        return "Ellipse(" + this.a + ", " + this.b + ")";
+    }
+
+    @Override
+    public List getShapes() 
+    {
+        List<Shape> shapes = new ArrayList<>();
+        return shapes;
     }
 }

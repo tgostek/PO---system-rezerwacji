@@ -1,13 +1,17 @@
 
 package constructive.solid.geometry;
 
-public class Difference implements Shape
+import java.util.*;
+
+public class Difference extends ShapeBase
 {
     
     private Shape shape1, shape2;
     
     Shape getShape1(){return this.shape1;}
     Shape getShape2(){return this.shape2;}
+    
+    
     
     public Difference(Shape shape1, Shape shape2) {
         this.shape1 = shape1;
@@ -24,5 +28,20 @@ public class Difference implements Shape
     public void accept(Visitator v) 
     {
         v.visit(this);
+    }
+    
+    @Override
+    public String toString() 
+    {
+        return "Difference";
+    }
+
+    @Override
+    public List getShapes() 
+    {
+        List<Shape> shapes = new ArrayList<>();
+        shapes.add(this.shape1);
+        shapes.add(this.shape2);
+        return shapes;
     }
 }

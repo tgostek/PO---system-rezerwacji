@@ -1,8 +1,11 @@
 
 package constructive.solid.geometry;
 
-public class Translated implements Shape{
-    
+import java.util.ArrayList;
+import java.util.List;
+
+public class Translated extends ShapeBase
+{    
     private Shape shape;
     private float x, y;
     
@@ -17,7 +20,6 @@ public class Translated implements Shape{
     @Override
     public boolean contains(float x, float y) {
         boolean isContains = shape.contains(x - this.x, y - this.y);
-        System.out.println("Punkt:" + x + " " + y + "    " + isContains + "   " + this);
         return isContains;
     }
 
@@ -25,5 +27,19 @@ public class Translated implements Shape{
     public void accept(Visitator v) 
     {
         v.visit(this);
+    }
+    
+    @Override
+    public String toString() 
+    {
+        return "Translated(" + this.x + ", " + this.y  + ")";
+    }
+
+    @Override
+    public List getShapes() 
+    {
+        List<Shape> shapes = new ArrayList<>();
+        shapes.add(this.shape);
+        return shapes;
     }
 }

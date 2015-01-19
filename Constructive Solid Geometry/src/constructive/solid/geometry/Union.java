@@ -1,7 +1,11 @@
 
 package constructive.solid.geometry;
 
-public class Union implements Shape{
+import java.util.ArrayList;
+import java.util.List;
+
+public class Union extends ShapeBase
+{
     
     private Shape shape1, shape2;
     
@@ -23,5 +27,20 @@ public class Union implements Shape{
     public void accept(Visitator v) 
     {
         v.visit(this);
+    }
+    
+    @Override
+    public String toString() 
+    {
+        return "Union";
+    }
+
+    @Override
+    public List getShapes() 
+    {
+        List<Shape> shapes = new ArrayList<>();
+        shapes.add(this.shape1);
+        shapes.add(this.shape2);
+        return shapes;
     }
 }
