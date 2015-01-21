@@ -1,29 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 package slidersswing;
 
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
-import javax.swing.event.*;
-/**
- *
- * @author tomaszgostek
- */
-public class SlidersSwing {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
+public class SlidersSwing 
+{
+   
+    public static void main(String[] args) 
+    {
+        ManagerGUI manager = new ManagerGUI();
         
-        JFrame frame = new JFrame("HelloWorldSwing");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(500, 500);
+        manager.startGUI();
+        
+        /*JFrame frame = createWindow();
+        
  
         JPanel mp = new JPanel();
         mp.setLayout(new BoxLayout(mp, BoxLayout.Y_AXIS));
@@ -115,7 +103,7 @@ public class SlidersSwing {
 
         
         //Display the window.
-        frame.setVisible(true);
+        frame.setVisible(true);*/
         
     }
     
